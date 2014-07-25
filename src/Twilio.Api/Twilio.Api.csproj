@@ -149,6 +149,7 @@
     <Compile Include="SharedAssemblyInfo.cs" />
     <Compile Include="Sms.cs" />
     <Compile Include="Transcriptions.cs" />
+    <Compile Include="TransportException.cs" />
     <Compile Include="Usage.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\AccountResult.cs" />

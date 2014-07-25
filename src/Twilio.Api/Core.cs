@@ -107,6 +107,12 @@ namespace Twilio
 			request.DateFormat = "ddd, dd MMM yyyy HH:mm:ss '+0000'";
 
 			var response = _client.Execute<T>(request);
+
+		    if (response.ResponseStatus != ResponseStatus.Completed)
+		    {
+                throw new TransportException<T>(response);
+		    }
+
 			return response.Data;
 		}
 
