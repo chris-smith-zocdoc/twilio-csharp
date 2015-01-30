@@ -1,10 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{894FF9E8-4DBF-4472-8AE2-1A6A988E105B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -16,7 +14,6 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -53,22 +50,18 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RestSharp.104.4.0\lib\net35-client\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="System.Net" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.0.1\lib\net35\RestSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Twilio.Api.Silverlight\Accounts.Async.cs">
@@ -88,6 +81,9 @@
     </Compile>
     <Compile Include="..\Twilio.Api.Silverlight\Core.Async.cs">
       <Link>Core.Async.cs</Link>
+    </Compile>
+    <Compile Include="..\Twilio.Api.Silverlight\Feedback.Async.cs">
+      <Link>Feedback.Async.cs</Link>
     </Compile>
     <Compile Include="..\Twilio.Api.Silverlight\IncomingPhoneNumbers.Async.cs">
       <Link>IncomingPhoneNumbers.Async.cs</Link>
@@ -135,10 +131,13 @@
     <Compile Include="Conference.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="ConnectApps.cs" />
+    <Compile Include="Feedback.cs" />
     <Compile Include="IncomingPhoneNumbers.cs" />
     <Compile Include="Media.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Model\Capabilities.cs" />
+    <Compile Include="Model\Feedback.cs" />
+    <Compile Include="Model\Issue.cs" />
     <Compile Include="Model\MediaListRequest.cs" />
     <Compile Include="Notifications.cs" />
     <Compile Include="OutgoingCallerIds.cs" />
@@ -227,6 +226,18 @@
     <Compile Include="Model\TwilioListBase.cs" />
     <Compile Include="Model\ValidationRequest.cs" />
     <Compile Include="Sip.cs" />
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\AddressResult.cs" />
+    <Compile Include="Model\AddressListRequest.cs" />
+    <Compile Include="Model\DependentPhoneNumber.cs" />
+    <Compile Include="Model\DependentPhoneNumberResult.cs" />
+    <Compile Include="Addresses.cs" />
+    <Compile Include="Model\AddressOptions.cs" />
+    <Compile Include="Addresses.Async.cs" />
+    <Compile Include="Model\Token.cs" />
+    <Compile Include="Model\IceServer.cs" />
+    <Compile Include="Tokens.cs" />
+    <Compile Include="Tokens.Async.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
