@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package>
 	<metadata>
 		<id>Twilio</id>
-		<version>3.6.16</version>
+		<version>3.6.25</version>
 		<authors>Twilio</authors>
 		<description>Twilio REST API helper library</description>
 		<language>en-US</language>
@@ -11,9 +11,22 @@
 		<licenseUrl>https://github.com/twilio/twilio-csharp/blob/master/LICENSE.txt</licenseUrl>
 		<tags>REST SMS voice telephony phone twilio twiml ASPNETWEBPAGES</tags>
 		<dependencies>
-			<dependency id="RestSharp" />
+			<dependency id="RestSharp" version="105.0.1" />
 		</dependencies>
 		<releaseNotes>
+      * 3.6.25 - Adding support for Addresses API
+               - Adding support for Tokens
+               - Recording price is now exposed on the Recording model
+      * 3.6.24 - Added Call/Message Delete methods
+               - Fixed broken Message Media code
+               - updated RestSharp reference
+      * 3.6.23 - Fixing SL and WP packaging
+      * 3.6.22 - Updating to RestSharp 105.0.0.  Drops support for Windows Phone 7.x.
+      * 3.6.21 - Updated RestSharp reference to 104.5.0
+      * 3.6.20 - Added paging options to ListSubAccounts
+      * 3.6.19 - Removed paging properties from AvailablePhoneNumberResult
+      * 3.6.18 - Fixed deserialization issues with Media and IPAddress models
+      * 3.6.17 - Added properties to support Feedback API
       * 3.6.16 - Added properties to support Message Delivery Information
       * 3.6.15 - Fixes missing ApiVersion property on PhoneNumberOptions
       * 3.6.14 - Fixes incorrect property name CountUnits

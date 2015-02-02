@@ -72,7 +72,7 @@ namespace Twilio
             _client.AddDefaultHeader("Accept-charset", "utf-8");
 #endif
 
-            _client.BaseUrl = string.Format("{0}{1}", BaseUrl, ApiVersion);
+            _client.BaseUrl = new Uri(string.Format("{0}{1}", BaseUrl, ApiVersion));
             _client.Timeout = 30500;
 
             // if acting on a subaccount, use request.AddUrlSegment("AccountSid", "value")
@@ -86,7 +86,7 @@ namespace Twilio
 		/// </summary>
 		/// <typeparam name="T">The type of object to create and populate with the returned data.</typeparam>
 		/// <param name="request">The RestRequest to execute (will use client credentials)</param>
-		public virtual T Execute<T>(RestRequest request) where T : new()
+		public virtual T Execute<T>(IRestRequest request) where T : new()
 		{
 			request.OnBeforeDeserialization = (resp) =>
 			{

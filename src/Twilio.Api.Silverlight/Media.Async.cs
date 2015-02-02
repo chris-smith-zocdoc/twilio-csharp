@@ -21,21 +21,18 @@ namespace Twilio
         /// <summary>
         /// Retrieve a list of Media objects with no list filters
         /// </summary>
-        public virtual void ListMedia(Action<MediaResult> callback)
+        public virtual void ListMedia(string messageSid, Action<MediaResult> callback)
         {
-            ListMedia(new MediaListRequest(), callback);
+            ListMedia(messageSid, new MediaListRequest(), callback);
         }
 
         /// <summary>
         /// Return a filtered list of Media objects. The list includes paging
         /// information.
         /// </summary>
-        public virtual void ListMedia(MediaListRequest options, Action<MediaResult> callback)
+        public virtual void ListMedia(string messageSid, MediaListRequest options, Action<MediaResult> callback)
         {
-            var request = new RestRequest();
-            request.Resource = "Accounts/{AccountSid}/Media.json";
-            AddMediaListOptions(options, request);
-            ExecuteAsync<MediaResult>(request, (response) => callback(response));
+            ListMessageMedia(messageSid, options, callback);
         }
 
         /// <summary>
@@ -74,12 +71,12 @@ namespace Twilio
         /// Media Instance resource.
         /// </summary>
         /// <param name="mediaSid">The Sid of the media to delete</param>
-        public virtual void DeleteMedia(string mediaSid, Action<DeleteStatus> callback)
+        public virtual void DeleteMedia(string messageSid, string mediaSid, Action<DeleteStatus> callback)
         {
             var request = new RestRequest(Method.DELETE);
-            request.Resource = "Accounts/{AccountSid}/Media/{MediaSid}.json";
-
-            request.AddParameter("MediaSid", mediaSid, ParameterType.UrlSegment);
+            request.Resource = "Accounts/{AccountSid}/Messages/{MessageSid}/Media/{MediaSid}.json";
+            request.AddUrlSegment("MessageSid", messageSid);
+            request.AddUrlSegment("MediaSid", mediaSid);
 
             ExecuteAsync(request, (response) => { callback(response.StatusCode == System.Net.HttpStatusCode.NoContent ? DeleteStatus.Success : DeleteStatus.Failed); });
         }

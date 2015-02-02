@@ -1,4 +1,4 @@
-﻿using RestSharp;
+using RestSharp;
 using RestSharp.Extensions;
 using RestSharp.Validation;
 using System;
@@ -20,6 +20,30 @@ namespace Twilio
 
             ExecuteAsync<Message>(request, (response) => callback(response));
         }
+
+		/// <summary>
+		/// Deletes a single Message instance
+		/// </summary>
+		/// <param name="messageSid">The Sid of the Message to delete</param>
+		/// <param name="callback">Method to be called on completion</param>
+		public virtual void DeleteMessage(string messageSid, Action<DeleteStatus> callback)
+		{
+			var request = new RestRequest(Method.DELETE);
+			request.Resource = "Accounts/{AccountSid}/Messages/{MessageSid}.json";
+			request.AddUrlSegment("MessageSid", messageSid);
+
+			ExecuteAsync(request, (response) => { callback(response.StatusCode == System.Net.HttpStatusCode.NoContent ? DeleteStatus.Success : DeleteStatus.Failed); });
+		}
+
+		public virtual void RedactMessage(string messageSid, Action<Message> callback)
+		{
+			var request = new RestRequest(Method.POST);
+			request.Resource = "Accounts/{AccountSid}/Messages/{MessageSid}.json";
+			request.AddUrlSegment("MessageSid", messageSid);
+
+			request.AddParameter("Body", "");
+			ExecuteAsync<Message>(request, (response) => callback(response));
+		}
 
         /// <summary>
         /// Returns a list of Messages. 
@@ -138,6 +162,21 @@ namespace Twilio
         /// <param name="applicationSid"></param>
         public virtual void SendMessage(string from, string to, string body, string[] mediaUrls, string statusCallback, string applicationSid, Action<Message> callback)
         {
+            SendMessage(from, to, body, mediaUrls, statusCallback, applicationSid, false, callback);
+        }
+
+        /// <summary>
+        /// Send a new Message to the specified recipients
+        /// Makes a POST request to the Messages List resource.
+        /// </summary>
+        /// <param name="from">The phone number to send the message from. Must be a Twilio-provided or ported local (not toll-free) number. Validated outgoing caller IDs cannot be used.</param>
+        /// <param name="to">The phone number to send the message to. If using the Sandbox, this number must be a validated outgoing caller ID</param>
+        /// <param name="body">The message to send. Must be 160 characters or less.</param>
+        /// <param name="statusCallback">A URL that Twilio will POST to when your message is processed. Twilio will POST the SmsSid as well as SmsStatus=sent or SmsStatus=failed</param>
+        /// <param name="applicationSid"></param>
+        /// <param name="mmsOnly">Doesn't fallback to SMS if set to true</param>
+        public virtual void SendMessage(string from, string to, string body, string[] mediaUrls, string statusCallback, string applicationSid, bool? mmsOnly, Action<Message> callback)
+        {
             Require.Argument("from", from);
             Require.Argument("to", to);
 
@@ -155,6 +194,7 @@ namespace Twilio
 
             if (statusCallback.HasValue()) request.AddParameter("StatusCallback", statusCallback);
             if (applicationSid.HasValue()) request.AddParameter("ApplicationSid", statusCallback);
+            if (mmsOnly.HasValue) request.AddParameter("MmsOnly", mmsOnly.Value);
 
             ExecuteAsync<Message>(request, (response) => callback(response));
         }
