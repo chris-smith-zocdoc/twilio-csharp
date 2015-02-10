@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,13 +12,18 @@
     <RootNamespace>Twilio.Silverlight</RootNamespace>
     <AssemblyName>Twilio.Api.Silverlight</AssemblyName>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <SilverlightApplication>false</SilverlightApplication>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
   </PropertyGroup>
   <!-- This property group is only here to support building this project using the 
        MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
@@ -65,9 +70,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
-    <Reference Include="RestSharp.Silverlight, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RestSharp.Silverlight, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RestSharp.104.4.0\lib\sl4\RestSharp.Silverlight.dll</HintPath>
+      <HintPath>..\packages\RestSharp.105.0.1\lib\sl4\RestSharp.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -179,6 +184,9 @@
     <Compile Include="..\Twilio.Api\Model\DomainResult.cs">
       <Link>Model\DomainResult.cs</Link>
     </Compile>
+    <Compile Include="..\Twilio.Api\Model\Feedback.cs">
+      <Link>Model\Feedback.cs</Link>
+    </Compile>
     <Compile Include="..\Twilio.Api\Model\HangupStyle.cs">
       <Link>Model\HangupStyle.cs</Link>
     </Compile>
@@ -205,6 +213,9 @@
     </Compile>
     <Compile Include="..\Twilio.Api\Model\IpAddressResult.cs">
       <Link>Model\IpAddressResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Twilio.Api\Model\Issue.cs">
+      <Link>Model\Issue.cs</Link>
     </Compile>
     <Compile Include="..\Twilio.Api\Model\Media.cs">
       <Link>Model\Media.cs</Link>
@@ -324,6 +335,7 @@
     <Compile Include="Conference.Async.cs" />
     <Compile Include="ConnectApps.Async.cs" />
     <Compile Include="AuthorizedConnectApps.Async.cs" />
+    <Compile Include="Feedback.Async.cs" />
     <Compile Include="Media.Async.cs" />
     <Compile Include="Messages.Async.cs" />
     <Compile Include="Queues.Async.cs" />
