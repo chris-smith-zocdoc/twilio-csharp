@@ -5,11 +5,11 @@ using RestSharp;
 
 namespace Twilio
 {
-    public class TransportException<T> : Exception
+    public class TransportException : Exception
     {
-        public IRestResponse<T> Response { get; private set; }
+        public IRestResponse Response { get; private set; }
 
-        public TransportException(IRestResponse<T> response)
+        public TransportException(IRestResponse response)
             : base(response.ErrorMessage, response.ErrorException)
         {
             Response = response;

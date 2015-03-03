@@ -110,7 +110,7 @@ namespace Twilio
 
 		    if (response.ResponseStatus != ResponseStatus.Completed)
 		    {
-                throw new TransportException<T>(response);
+                throw new TransportException(response);
 		    }
 
 			return response.Data;

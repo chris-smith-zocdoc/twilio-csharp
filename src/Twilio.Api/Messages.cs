@@ -34,9 +34,14 @@ namespace Twilio
 			request.Resource = "Accounts/{AccountSid}/Messages/{MessageSid}.json";
 			request.AddUrlSegment("MessageSid", messageSid);
 
-			var response = Execute(request);
-			return response.StatusCode == System.Net.HttpStatusCode.NoContent ? DeleteStatus.Success : DeleteStatus.Failed;
-		}
+            var response = Execute(request);
+            if (response.ResponseStatus != ResponseStatus.Completed ||
+                response.StatusCode != System.Net.HttpStatusCode.NoContent)
+            {
+                throw new TransportException(response);
+            }
+            return DeleteStatus.Success;
+        }
 
 		public virtual Message RedactMessage(string messageSid)
 		{
